@@ -1,0 +1,35 @@
+{
+  "name": "zamonaviy-talim-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Zamonaviy Ta'lim Dizayni - Next.js Frontend va NestJS Backend Monorepo Loyihasi",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "start": "node scripts/start.js",
+    "dev:all": "node scripts/dev.js",
+    "dev:web": "npm run dev --workspace=web",
+    "dev:api": "npm run start:dev --workspace=api",
+    "build:web": "npm run build --workspace=web",
+    "build:api": "npm run build --workspace=api",
+    "build": "npm run build:api && npm run build:web",
+    "lint": "eslint \"apps/**/*.{js,jsx}\" \"packages/**/*.js\"",
+    "format": "prettier --write \"apps/**/*.{js,jsx,json,css}\" \"packages/**/*.{js,json}\"",
+    "format:check": "prettier --check \"apps/**/*.{js,jsx,json,css}\" \"packages/**/*.{js,json}\"",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "prisma:generate": "npm run prisma:generate --workspace=api",
+    "prisma:migrate": "npm run prisma:migrate --workspace=api",
+    "prisma:push": "npm run prisma:push --workspace=api",
+    "test": "node apps/api/scripts/test-full-integration.js",
+    "test:all": "node apps/api/scripts/test-auth.js && node apps/api/scripts/test-learning-system.js && node apps/api/scripts/test-dashboards.js && node apps/api/scripts/test-admin-panel.js && node apps/api/scripts/test-telegram-bot.js && node apps/api/scripts/test-full-integration.js",
+    "test:db": "npm run test:db --workspace=api"
+  },
+  "devDependencies": {
+    "eslint": "^9.16.0",
+    "prettier": "^3.4.2"
+  }
+}

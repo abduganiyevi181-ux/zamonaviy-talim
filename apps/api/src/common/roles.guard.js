@@ -1,0 +1,29 @@
+import { Injectable, CanActivate, ExecutionContext, ForbiddenException, Dependencies } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { ROLES_KEY } from './roles.decorator';
+
+@Injectable()
+@Dependencies(Reflector)
+export class RolesGuard {
+  constructor(reflector) {
+    this.reflector = reflector;
+  }
+
+  canActivate(context) {
+    const requiredRoles = this.reflector.getAllAndOverride(ROLES_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+
+    if (!requiredRoles || requiredRoles.length === 0) {
+      return true;
+    }
+
+    const { user } = context.switchToHttp().getRequest();
+    if (!user || !requiredRoles.includes(user.role)) {
+      throw new ForbiddenException('Ushbu amalni bajarish uchun sizda yetarli ruxsat mavjud emas');
+    }
+
+    return true;
+  }
+}

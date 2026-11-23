@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+dist/
+build/
+.next/
+out/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+!.env.example
+apps/*/.env
+apps/*/.env.local
+!apps/*/.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Docker volume mounts
+postgres_data/
+redis_data/
+pgdata/
+
+# Coverage
+coverage/
+*.lcov
+
+# Prisma generated artifacts
+apps/api/prisma/migrations/dev.db*
